@@ -1,0 +1,1042 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        line-height: 1.45;
+        font-family: Roboto;
+        font-size: 13px;
+      }
+
+      .tree-h {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: max-content;
+        margin: auto;
+      }
+
+      .row {
+        display: flex;
+        padding: 0 4px;
+      }
+
+      .row:hover {
+        background-color: #e9e9e9;
+      }
+
+      .row .group {
+        display: flex;
+      }
+
+      .row .item {
+        padding: 16px 4px;
+        position: relative;
+      }
+
+      .row .item:hover{
+        font-weight: bold;
+      }
+
+      .row .empty {
+        border: none;
+        padding: 20px 12px;
+        border-radius: 6px;
+        position: relative;
+        min-width: 70px;
+        box-sizing: border-box;
+        position: relative;
+      }
+
+      .row .name-wap {
+        display: block;
+        border: 1px solid #ddd;
+        padding: 4px 6px;
+        border-radius: 6px;
+        position: relative;
+        width: 62px;
+        height: 100%;
+        box-sizing: border-box;
+        text-align: center;
+        position: relative;
+      }
+
+      .has-chilren::after {
+        content: "";
+        height: 17px;
+        width: 0px;
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%) translateY(100%);
+        border-left: 1px solid;
+      }
+
+      .has-parent::before {
+        content: "";
+        height: 17px;
+        width: 0px;
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%) translateY(-100%);
+        border-left: 1px solid;
+      }
+
+      .group .empty::before {
+        content: "";
+        width: calc(100% + 14px);
+        position: absolute;
+        top:  0px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-100%);
+        border-top: 1px solid #000;
+      }
+
+      .group .item::before {
+        content: "";
+        width: calc(100%);
+        position: absolute;
+        top: 0px;
+        left: 50%;
+        transform: translateX(-50%) translateY(-100%);
+        border-top: 1px solid #000;
+        box-sizing: border-box;
+      }
+
+      .group .item:first-child::before {
+        width: calc(50% + 4px);
+        left: 50%;
+        /* right: -4px; */
+        transform: translateX(-0%) translateY(-100%)
+      }
+
+      .group .item:last-child::before {
+        width: calc(50% + 4px);
+        left: 50%;
+        right: auto;
+        transform: translateX(-100%) translateY(-100%)
+      }
+
+      .group .item-only::before {
+        content: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="tree-h"></div>
+  </body>
+  <script>
+    var _datas = [
+      {
+        id: 1.0,
+        name: "Mai Thúc Dư",
+        date: 1347,
+        children: [
+          {
+            id: 1.1,
+            name: "Hiệp Hằng",
+            children: [
+              {
+                id: 1.11,
+                name: "Mai Bá Luận",
+              },
+            ],
+          },
+          {
+            id: 1.2,
+            name: "Hiệp Ngát",
+            children: [
+              {
+                id: 1.21,
+                name: "Mai Ba Loan",
+              },
+            ],
+          },
+          {
+            id: 1.3,
+            name: "Hiệp An",
+            children: [
+              {
+                id: 1.31,
+                name: "Ba Mai Hoa",
+              },
+            ],
+          },
+        ],
+      },
+      {
+        id: 2.0,
+        name: "Mai Khắc Dương",
+        date: 1437,
+        children: [
+          {
+            id: 2.1,
+            name: "Mai Cần",
+            children: [
+              {
+                id: 2.11,
+                name: "Mai Quần",
+                children: [
+                  {
+                    id: 2.111,
+                    name: "Mai Quyên",
+                    children: [],
+                  },
+                  {
+                    id: 2.112,
+                    name: "Mai Quyền",
+                    children: [
+                      {
+                        id: 2.1121,
+                        name: "Mai Vệ",
+                        children: [
+                          {
+                            id: 2.11211,
+                            name: "Mai Uy",
+                            children: [],
+                          },
+                          {
+                            id: 2.11212,
+                            name: "Mai Dậu",
+                            children: [
+                              {
+                                id: 2.112121,
+                                name: "Mai Thắng",
+                                children: [],
+                              },
+                              {
+                                id: 2.112122,
+                                name: "Mai Lợi",
+                                children: [],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                      {
+                        id: 2.1122,
+                        name: "Mai Tuệ",
+                        children: [
+                          {
+                            id: 2.11221,
+                            name: "Mai Tân",
+                            children: [
+                              {
+                                id: 2.112211,
+                                name: "Mai Uân",
+                                children: [],
+                              },
+                              {
+                                id: 2.112212,
+                                name: "Mai Văn Chinh",
+                                date: 1930,
+                                children: [
+                                  {
+                                    id: 2.1122121,
+                                    name: "Mai Văn Thịnh",
+                                    date: 1965,
+                                    children: [
+                                      {
+                                        id: 2.11221211,
+                                        name: "Mai Thị Thảo",
+                                        date: 1992,
+                                        children: [],
+                                      },
+                                      {
+                                        id: 2.11221212,
+                                        name: "Mai Thị Phương",
+                                        date: 1995,
+                                        children: [],
+                                      },
+                                      {
+                                        id: 2.11221213,
+                                        name: "Mai Tiến Lực",
+                                        date: 1996,
+                                        children: [],
+                                      },
+                                    ],
+                                  },
+                                  {
+                                    id: 2.1122122,
+                                    name: "Mai Văn Khánh",
+                                    date: 1968,
+                                    children: [
+                                      {
+                                        id: 2.11221221,
+                                        name: "Mai Quốc Thái",
+                                        children: [],
+                                      },
+                                    ],
+                                  },
+                                  {
+                                    id: 2.1122123,
+                                    name: "Mai Văn Thủy",
+                                    date: 1974,
+                                    children: [
+                                      {
+                                        id: 2.11221231,
+                                        name: "Mai Văn Trọng",
+                                        date: 1997,
+                                        children: [],
+                                      },
+                                      {
+                                        id: 2.11221232,
+                                        name: "Mai Thị Ngọc",
+                                        date: 1999,
+                                        children: [],
+                                      },
+                                      {
+                                        id: 2.11221233,
+                                        name: "Mai Thị Hà",
+                                        date: 2005,
+                                        children: [],
+                                      },
+                                      {
+                                        id: 2.11221234,
+                                        name: "Mai Hoàng Long",
+                                        date: 2012,
+                                        children: [],
+                                      },
+                                    ],
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                      {
+                        id: 2.1123,
+                        name: "Mai Sói",
+                        children: [
+                          {
+                            id: 2.11231,
+                            name: "Mai Hòe",
+                            children: [
+                              {
+                                id: 2.112311,
+                                name: "Mai Hướng",
+                                children: [
+                                  {
+                                    id: 2.1123111,
+                                    name: "Mai Chiều",
+                                    children: [],
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    id: 2.113,
+                    name: "Mai Thích",
+                    children: [],
+                  },
+                  {
+                    id: 2.114,
+                    name: "Mai Trí",
+                    children: [
+                      {
+                        id: 2.1141,
+                        name: "Mai Trợ",
+                        children: [],
+                      },
+                    ],
+                  },
+                  {
+                    id: 2.115,
+                    name: "Mai Quý",
+                    children: [
+                      {
+                        id: 2.1151,
+                        name: "Mai Giá",
+                        children: [
+                          {
+                            id: 2.11511,
+                            name: "Mai Giao",
+                            children: [
+                              {
+                                id: 2.115111,
+                                name: "Mai Cầu",
+                                children: [],
+                              },
+                              {
+                                id: 2.115112,
+                                name: "Mai Khẩn",
+                                children: [
+                                  {
+                                    id: 2.1151121,
+                                    name: "Mai Nguyện",
+                                    children: [],
+                                  },
+                                  {
+                                    id: 2.1151122,
+                                    name: "Mai Tỉnh",
+                                    children: [],
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                id: 2.12,
+                name: "Mai Hợp",
+                children: [
+                  {
+                    id: 2.121,
+                    name: "Mai Nhu",
+                    children: [],
+                  },
+                  {
+                    id: 2.122,
+                    name: "Mai Hap",
+                    children: [
+                      {
+                        id: 2.1221,
+                        name: "Mai Nạp",
+                        children: [],
+                      },
+                      {
+                        id: 2.1222,
+                        name: "Mai Pháp",
+                        children: [
+                          {
+                            id: 2.12221,
+                            name: "Mai Diên",
+                            children: [],
+                          },
+                          {
+                            id: 2.12222,
+                            name: "Mai Inh",
+                            children: [
+                              {
+                                id: 2.12221,
+                                name: "Mai Đính",
+                                children: [],
+                              },
+                              {
+                                id: 2.12222,
+                                name: "Mai Đảng",
+                                children: [
+                                  {
+                                    id: 2.122221,
+                                    name: "Mai Đạt",
+                                    children: [],
+                                  },
+                                  {
+                                    id: 2.122222,
+                                    name: "Mai Tiến",
+                                    children: [],
+                                  },
+                                  {
+                                    id: 2.122223,
+                                    name: "Mai Bộ",
+                                    children: [],
+                                  },
+                                ],
+                              },
+                              {
+                                id: 2.12223,
+                                name: "Mai Đam",
+                                children: [
+                                  {
+                                    id: 2.122231,
+                                    name: "Mai Thọ",
+                                    children: [],
+                                  },
+                                  {
+                                    id: 2.122232,
+                                    name: "Mai Trường",
+                                    children: [],
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                          {
+                            id: 2.12223,
+                            name: "Mai Tặng",
+                            children: [
+                              {
+                                id: 2.122231,
+                                name: "Mai Tăng",
+                                children: [],
+                              },
+                              {
+                                id: 2.122232,
+                                name: "Mai Châu",
+                                children: [
+                                  {
+                                    id: 2.1222321,
+                                    name: "Mai Tuấn",
+                                    children: [],
+                                  },
+                                ],
+                              },
+                              {
+                                id: 2.122233,
+                                name: "Mai Cao",
+                                children: [
+                                  {
+                                    id: 2.1222331,
+                                    name: "Mai Sang",
+                                    children: [],
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                          {
+                            id: 2.12224,
+                            name: "Mai Phô",
+                            children: [
+                              {
+                                id: 2.122241,
+                                name: "Mai Chương",
+                                children: [
+                                  {
+                                    id: 2.1222411,
+                                    name: "Mai Đức",
+                                    children: [],
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    id: 2.123,
+                    name: "Mai Doãn",
+                    children: [],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: 2.2,
+            name: "Mai Kính",
+            children: [
+              {
+                id: 2.21,
+                name: "Mai Trọng",
+                children: [
+                  {
+                    id: 2.211,
+                    name: "Mai Thể",
+                    children: [
+                      {
+                        id: 2.2111,
+                        name: "Mai Riếc",
+                        children: [
+                          {
+                            id: 2.21111,
+                            name: "Mai Dưỡng",
+                            children: [
+                              {
+                                id: 2.211111,
+                                name: "Mai Hà",
+                                children: [],
+                              },
+                              {
+                                id: 2.211112,
+                                name: "Mai Dũng",
+                                children: [],
+                              },
+                              {
+                                id: 2.211113,
+                                name: "Mai Tuấn",
+                                children: [],
+                              },
+                              {
+                                id: 2.211114,
+                                name: "Mai Điệp",
+                                children: [],
+                              },
+                              {
+                                id: 2.211115,
+                                name: "Mai Thị Dung",
+                                children: [],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                      {
+                        id: 2.2112,
+                        name: "Mai Diên",
+                        children: [
+                          {
+                            id: 2.21121,
+                            name: "Mai Miêm",
+                            children: [],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                id: 2.22,
+                name: "Mai Cán",
+                children: [
+                  {
+                    id: 2.221,
+                    name: "Mai Xử",
+                    children: [
+                      {
+                        id: 2.2211,
+                        name: "Mai Đài",
+                        children: [
+                          {
+                            id: 2.22111,
+                            name: "Mai Ngữ",
+                            children: [],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    id: 2.222,
+                    name: "Mai Giảng",
+                    children: [
+                      {
+                        id: 2.2221,
+                        name: "Mai Thính",
+                        children: [
+                          {
+                            id: 2.22211,
+                            name: "Mai Thình",
+                            children: [
+                              {
+                                id: 2.222111,
+                                name: "Mai Bình",
+                                children: [],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                ],
+              },
+              {
+                id: 2.23,
+                name: "Mai Thùy",
+                children: [
+                  {
+                    id: 2.231,
+                    name: "Mai Ngận",
+                    children: [
+                      {
+                        id: 2.2311,
+                        name: "Mai Đích",
+                        children: [
+                          {
+                            id: 2.23111,
+                            name: "Mai Đốc",
+                            children: [
+                              {
+                                id: 2.231111,
+                                name: "Mai Tích",
+                                children: [
+                                  {
+                                    id: 2.2311111,
+                                    name: "Mai Mỹ",
+                                    children: [
+                                      {
+                                        id: 2.23111111,
+                                        name: "Mai Minh",
+                                        children: [],
+                                      },
+                                      {
+                                        id: 2.23111112,
+                                        name: "Mai Thuật",
+                                        children: [],
+                                      },
+                                    ],
+                                  },
+                                  {
+                                    id: 2.2311112,
+                                    name: "Mai Sơn",
+                                    children: [
+                                      {
+                                        id: 2.23111121,
+                                        name: "Mai Trường",
+                                        children: [],
+                                      },
+                                      {
+                                        id: 2.23111122,
+                                        name: "Mai Học",
+                                        children: [],
+                                      },
+                                    ],
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                    ],
+                  },
+                  {
+                    id: 2.232,
+                    name: "Mai Hiếng",
+                    children: [
+                      {
+                        id: 2.2321,
+                        name: "Mai Nhai",
+                        children: [],
+                      },
+                      {
+                        id: 2.2322,
+                        name: "Mai Tụ",
+                        children: [
+                          {
+                            id: 2.23221,
+                            name: "Mai Tuyền",
+                            children: [
+                              {
+                                id: 2.232211,
+                                name: "Mai Vân",
+                                children: [],
+                              },
+                              {
+                                id: 2.232212,
+                                name: "Mai Nhiệm",
+                                children: [
+                                  {
+                                    id: 2.2322121,
+                                    name: "Mai Huy",
+                                    children: [],
+                                  },
+                                  {
+                                    id: 2.2322121,
+                                    name: "Mai Thuận",
+                                    children: [],
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                          {
+                            id: 2.23222,
+                            name: "Mai Khải",
+                            children: [
+                              {
+                                id: 2.232221,
+                                name: "Mai Khôi",
+                                children: [
+                                  {
+                                    id: 2.2322211,
+                                    name: "Mai Huy",
+                                    children: [],
+                                  },
+                                  {
+                                    id: 2.2322212,
+                                    name: "Mai Hoàng",
+                                    children: [],
+                                  },
+                                ],
+                              },
+                            ],
+                          },
+                        ],
+                      },
+                      {
+                        id: 2.2323,
+                        name: "Mai Đương",
+                        children: [],
+                      },
+                    ],
+                  },
+                ],
+              },
+            ],
+          },
+          {
+            id: 2.3,
+            name: "Mai Ngọc Cương",
+            children: [],
+          },
+        ],
+      },
+    ];
+    var _nodeH = document.getElementsByClassName("tree-h")[0];
+
+    function countRows(node, obj, idx = 1) {
+      if (!obj) {
+        obj = { count: 1 };
+      }
+      if (obj.count < idx) {
+        obj.count = idx;
+      }
+      node.rowIdx = idx - 1;
+      if (node.children.length) {
+        node.children.forEach((x) => {
+          x.parent = node;
+          countRows(x, obj, idx + 1);
+        });
+      }
+      return obj.count;
+    }
+
+    function addRowNodes(rows, node) {
+      rows[node.rowIdx].nodes.push(node);
+      if (node.children.length) {
+        node.children.forEach((x) => {
+          addRowNodes(rows, x);
+        });
+      }
+    }
+
+    function buidlRows(rows) {
+      rows.forEach((row) => {
+        rowEl = row.rowEl;
+        rowEl.innerHTML = "";
+        let group = {
+          parentId: "",
+          el: undefined,
+        };
+
+        row.nodes.forEach((node, idx) => {
+          if (
+            node.name &&
+            node.parent?.id &&
+            group.parentId != node.parent?.id
+          ) {
+            let groupEl = document.createElement("div");
+            groupEl.className = "group";
+            rowEl.appendChild(groupEl);
+            group = {
+              parentId: node.parent.id,
+              el: groupEl,
+            };
+          }
+
+          let idxLastParent = -1;
+
+          if (group.parentId) {
+            idxLastParent = row.nodes.findLastIndex(
+              (x) => x.name && x.parent && x.parent.id == group.parentId
+            );
+          }
+
+          if (node.name) {
+            let childrenNode = document.createElement("div");
+            childrenNode.className = "item";
+
+            if (group.el) {
+              group.el.appendChild(childrenNode);
+            } else {
+              rowEl.appendChild(childrenNode);
+            }
+
+            let divName = document.createElement("div");
+            divName.className = "name-wap";
+            if (node.children?.length) {
+              divName.className += " has-chilren";
+            }
+            if (node.parent) {
+              divName.className += " has-parent";
+            }
+
+            if (node.parent?.children.length == 1) {
+              childrenNode.className += " item-only";
+            }
+
+            divName.innerHTML = node.name.split(" ").join("<br/>");
+            childrenNode.appendChild(divName);
+          } else {
+            let divEmpty = document.createElement("div");
+            divEmpty.className = "empty";
+            if (group.el && idx < idxLastParent) {
+              group.el.appendChild(divEmpty);
+            } else {
+              rowEl.appendChild(divEmpty);
+            }
+          }
+        });
+      });
+    }
+
+    function addEmptyParent(rows, node) {
+      const parent = node.parent;
+      const rowParent = rows[parent.rowIdx];
+      let idxParent = rowParent.nodes.indexOf(parent);
+      const childrens = rows[node.rowIdx].nodes.filter(
+        (x) => x.name && x.parent == parent
+      );
+      const firstIdx = rows[node.rowIdx].nodes.indexOf(childrens[0]);
+      const lastIdx = rows[node.rowIdx].nodes.indexOf(
+        childrens[childrens.length - 1]
+      );
+      const avg = Math.floor((lastIdx - firstIdx) / 2);
+      const newIdx = firstIdx + avg;
+      if (newIdx > idxParent) {
+        for (let i = 0; i < newIdx - idxParent; i++) {
+          rowParent.nodes.splice(idxParent, 0, {
+            // parent: parent.parent
+          });
+        }
+
+        buidlRows(rows);
+
+        rowParent.nodes.forEach((x) => {
+          if (x.name && x.parent) {
+            addEmptyParent(rows, x);
+          }
+        });
+      }
+    }
+
+    function addNode(rows, row, node) {
+      if (node.parent) {
+        let parentIdx = rows[node.rowIdx - 1].nodes.indexOf(node.parent);
+        if (parentIdx < row.nodes.length) {
+          //tìm phần từ đầu tiên có cùng nút cha
+          const firstIdx = row.nodes.findIndex(
+            (x) => x.name && x.parent == node.parent
+          );
+          if (firstIdx > 0 && !row.nodes[firstIdx - 1].name) {
+            row.nodes.splice(firstIdx - 1, 1);
+          }
+        }
+        if (parentIdx > row.nodes.length) {
+          const c = parentIdx - row.nodes.length;
+          for (let i = 0; i < c; i++) {
+            row.nodes.push({
+              // parent: node.parent
+            });
+          }
+        }
+      }
+
+      row.nodes.push(node);
+      buidlRows(rows);
+      if (node.parent) {
+        addEmptyParent(rows, node);
+      }
+    }
+
+    function calcRows(_rows, rows) {
+      _rows.forEach((_row, rowIdx) => {
+        const row = rows[rowIdx];
+        _row.nodes.forEach((node) => {
+          addNode(rows, row, node);
+        });
+      });
+
+      const maxRowItem = rows.reduce((c, row) => {
+        if (row.nodes.length > c) {
+          return row.nodes.length;
+        }
+        return c;
+      }, 0);
+      
+      rows.map((row, rowIdx) => {
+        const childrens = row.nodes.filter((x, nodeIdx) => {
+          if (x.name && x.parent) {
+            const parentIdx = rows[rowIdx - 1].nodes.indexOf(x.parent);
+            if (parentIdx > nodeIdx) {
+              if (!x.children?.length || x.children?.length == 2) {
+                if (x.children?.length == 2) {
+                  const lastChild = x.children[1];
+                  if (
+                    rows[lastChild.rowIdx].nodes.indexOf(lastChild) !=
+                    nodeIdx + 1
+                  ) {
+                    return false;
+                  }
+                }
+                if (nodeIdx == 0 || row.nodes[nodeIdx - 1].parent != x.parent) {
+                  if (
+                    nodeIdx < row.nodes.length - 1 &&
+                    !row.nodes[nodeIdx + 1].name
+                  ) {
+                    return true;
+                  }
+                }
+              }
+            }
+          }
+          return false;
+        });
+
+        
+        childrens?.map((node) => {
+          let idx = row.nodes.indexOf(node);
+          const parentIdx = rows[node.parent.rowIdx].nodes.indexOf(node.parent);
+          let lastIdx = row.nodes.findIndex((x, i) => i > idx && x.name);
+          if (lastIdx > parentIdx) {
+            lastIdx = parentIdx + 1;
+          }
+          if (lastIdx > idx + 1) {
+            const _node = row.nodes[lastIdx - 1];
+            row.nodes[lastIdx - 1] = node;
+            row.nodes[idx] = _node;
+          }
+        });
+        
+        while (row.nodes.length < maxRowItem) {
+          row.nodes.push({});
+        }
+      });
+    }
+
+    function buildTree(el, node) {
+      //đếm số dòng
+      const _rows = [];
+      const rows = [];
+      const cRows = countRows(node);
+      for (let i = 0; i < cRows; i++) {
+        let rowEl = document.createElement("div");
+        rowEl.className = "row";
+        el.appendChild(rowEl);
+        _rows.push({
+          nodes: [],
+          rowEl: rowEl,
+        });
+        rows.push({
+          nodes: [],
+          rowEl: rowEl,
+        });
+      }
+
+      //add các node vào _rows
+      addRowNodes(_rows, node);
+
+      //add các node vào rows
+      calcRows(_rows, rows);
+
+      //vẽ rows
+      buidlRows(rows);
+    }
+    buildTree(_nodeH, _datas[1].children[0]);
+  </script>
+</html>
