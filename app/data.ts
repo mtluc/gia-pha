@@ -291,44 +291,44 @@ export const dataInput: TreeNodeInput = {
                   gender: 0,
                   children: [
                     {
-                      id: 2.12221,
+                      id: 2.122221,
                       name: "Mai Đính",
                       gender: 0,
                     },
                     {
-                      id: 2.12222,
+                      id: 2.122222,
                       name: "Mai Đảng",
                       gender: 0,
                       children: [
                         {
-                          id: 2.122221,
+                          id: 2.1222221,
                           name: "Mai Đạt",
                           gender: 0,
                         },
                         {
-                          id: 2.122222,
+                          id: 2.1222222,
                           name: "Mai Tiến",
                           gender: 0,
                         },
                         {
-                          id: 2.122223,
+                          id: 2.1222223,
                           name: "Mai Bộ",
                           gender: 0,
                         },
                       ],
                     },
                     {
-                      id: 2.12223,
+                      id: 2.122223,
                       name: "Mai Đam",
                       gender: 0,
                       children: [
                         {
-                          id: 2.122231,
+                          id: 2.1222231,
                           name: "Mai Thọ",
                           gender: 0,
                         },
                         {
-                          id: 2.122232,
+                          id: 2.1222232,
                           name: "Mai Trường",
                           gender: 0,
                         },
@@ -445,6 +445,9 @@ export interface TreeNodeNew {
   left: number;
   right: number;
   level: number;
+  parentId?: number;
+  emptyLefts?:number;
+  emptyRights?:number;
 }
 export const convertDataNew = (
   current: ArrayNomalized<TreeNodeNew> = {
@@ -466,7 +469,14 @@ export const convertDataNew = (
         current.data[id].right += 2;
       }
     });
-    const item = { ...node, children: [], left, level, right: left + 1 };
+    const item: TreeNodeNew = {
+      ...node,
+      parentId: parent?.id,
+      children: [],
+      left,
+      level,
+      right: left + 1,
+    };
     addItem(current, item);
     if (node.children?.length) {
       node.children.forEach((x) => {

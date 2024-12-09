@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tree Visualization</title>
+</head>
+<body>
+    <script>
+        // Hàm xây dựng cây vào mảng 2D
+        function buildTreeInGrid(node, grid, row = 0, col = 0, width = 16) {
+            if (!grid[row]) grid[row] = [];
+            const nodeWidth = 2;  // Mỗi node chiếm 2 ô
+            const fullWidth = width;
+
+            // Tính toán ô trống trước và sau node để căn giữa
+            const emptyBefore = Math.floor((fullWidth - nodeWidth) / 2);
+            const emptyAfter = fullWidth - nodeWidth - emptyBefore;
+
+            // Đặt ô trống trước node
+            for (let i = 0; i < emptyBefore; i++) {
+                grid[row][col + i] = 0;  // 0 đại diện cho ô trống
+            }
+
+            // Đặt node vào đúng vị trí (2 ô cho mỗi node, mỗi ô có giá trị là 1)
+            grid[row][col + emptyBefore] = 1;  // Ô đầu tiên của node
+            grid[row][col + emptyBefore + 1] = 1;  // Ô thứ hai của node
+
+            // Nếu có node con, đệ quy để vẽ các node con
+            if (node.children && node.children.length > 0) {
+                let childCol = col;
+                const numChildren = node.children.length;
+                node.children.forEach((child, index) => {
+                    const childWidth = fullWidth / numChildren;  // Chia đều chiều rộng cho các node con
+                    buildTreeInGrid(child, grid, row + 1, childCol, childWidth);
+                    childCol += childWidth;
+                });
+            }
+
+            // Đặt ô trống sau node
+            for (let i = 0; i < emptyAfter; i++) {
+                grid[row][col + emptyBefore + nodeWidth + i] = 0;  // 0 đại diện cho ô trống
+            }
+        }
+
+        // Hàm in mảng 2D ra console để kiểm tra
+        function printGrid(grid) {
+            console.log("Mảng cây 2D:");
+            grid.forEach(row => {
+                console.log(row.map(cell => (cell === 1 ? '1' : '0')).join(' '));
+            });
+        }
+
+        // Dữ liệu cây mẫu
+        const tree = {
+            id: 1,
+            children: [
+                {
+                    id: 2,
+                    children: [
+                        { id: 4, children: [] },
+                        { id: 5, children: [
+                            { id: 8, children: [] },
+                        ] }
+                    ]
+                },
+                {
+                    id: 3,
+                    children: [
+                        { id: 6, children: [] },
+                        { id: 7, children: [] }
+                    ]
+                }
+            ]
+        };
+
+        // Mảng 2D để lưu trữ cây
+        const grid = [];
+
+        // Xây dựng cây vào mảng 2D
+        buildTreeInGrid(tree, grid);
+
+        // In mảng cây ra console
+        printGrid(grid);
+    </script>
+</body>
+</html>
